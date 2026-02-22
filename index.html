@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XV Ivanna Kamila</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500&family=Great+Vibes&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Montserrat',sans-serif;background-color:#33010E;color:white;display:flex;justify-content:center;padding:40px 20px;overflow-x:hidden;position:relative}
+
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+}
+
+.container{position:relative;z-index:2;max-width:900px;width:85%;margin:40px 0;padding:60px;border:2px solid #efb810;border-radius:10px;background:transparent}
+.container{position:relative;max-width:900px;width:85%;margin:40px 0;padding:60px;border:2px solid #efb810;border-radius:10px;background:transparent}
+
+/* Animaciones suaves */
+.fade-in{opacity:0;transform:translateY(30px);transition:all 1.2s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+h1{font-family:'Great Vibes',cursive;background:linear-gradient(180deg,#fff3b0,#efb810,#c99700);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:6.5em;text-align:center;margin:10px 0 20px;letter-spacing:3px;text-shadow:0 6px 18px rgba(0,0,0,.55),0 0 12px rgba(239,184,16,.45);animation:glow 3s ease-in-out infinite alternate}
+
+@keyframes glow{
+0%{text-shadow:0 6px 18px rgba(0,0,0,.55),0 0 12px rgba(239,184,16,.45)}
+100%{text-shadow:0 6px 22px rgba(0,0,0,.7),0 0 25px rgba(239,184,16,.9)}
+}
+
+.top-invite{font-size:1.1rem;font-weight:500;margin:18px 0 10px;text-align:center;color:#e7c96a;font-family:'Playfair Display',serif}
+.after-name{font-size:1.1rem;font-weight:500;margin:18px auto 10px;text-align:center;color:#e7c96a;font-family:'Playfair Display',serif;max-width:750px}
+.date{font-size:2.4rem;text-align:center;color:#efb810;font-family:'Cinzel Decorative',serif;margin:40px 0 60px;letter-spacing:4px;text-transform:uppercase}
+.subtitle{text-align:center;font-size:1.3em;margin-bottom:30px}
+.event-section{margin-top:40px}
+.event-title{font-family:'Playfair Display',serif;font-size:1.8em;color:#efb810;margin-bottom:20px;text-align:center;letter-spacing:2px;text-transform:uppercase}
+.event-content{display:flex;gap:20px;flex-wrap:wrap}
+.info-box{background:white;color:#33010E;flex:1;min-width:250px;padding:28px 20px;border-radius:15px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,.25);display:flex;flex-direction:column;justify-content:center;align-items:center;transition:transform .4s ease}
+.info-box:hover{transform:translateY(-6px)}
+.info-box p{margin:10px 0 5px;text-align:center}
+.info-box img{width:100%;border-radius:10px;margin-bottom:10px;height:200px;object-fit:cover}
+.map-button{display:inline-block;margin-top:15px;padding:12px 20px;background:#33010E;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:all .3s ease}
+.map-button:hover{background:#efb810;color:#33010E}
+.time{font-weight:bold;margin-bottom:18px;display:inline-block;background:white;color:#33010E;padding:6px 14px;border-radius:20px;font-size:.95em}
+.gallery{margin-top:50px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.gallery-grid img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:2px solid #efb810;cursor:pointer;transition:transform .3s}
+.gallery-grid img:hover{transform:scale(1.05)}
+
+.modal{display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.85);justify-content:center;align-items:center}
+.modal img{max-width:90%;max-height:85%;border-radius:15px;border:3px solid #efb810}
+.modal.active{display:flex}
+.itinerary,.extra-section{margin-top:50px}
+.itinerary-box,.extra-box{background:white;color:#33010E;padding:25px;border-radius:15px;margin-top:20px;text-align:center}
+.rsvp-note{font-size:1.35rem;font-weight:600;margin:18px 0 10px;text-align:center;color:#efb810;font-family:'Playfair Display',serif}
+.welcome-text{font-family:'Playfair Display',serif;color:#efb810;text-align:center;max-width:650px;margin:10px auto 35px;line-height:1.7;font-size:1.7rem}
+.rsvp-button{display:block;width:220px;margin:20px auto;padding:15px;background:#efb810;color:#33010E;text-align:center;text-decoration:none;font-weight:bold;border-radius:10px;transition:.3s}
+.rsvp-button:hover{background:white}
+.location{margin-bottom:10px;font-weight:500}
+.map-button{display:inline-block;width:auto;align-self:center}
+.timeline{position:relative;margin:10px 0;padding-left:34px}
+.timeline:before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:#efb810}
+.t-item{position:relative;margin:18px 0;display:flex;align-items:center;gap:14px}
+.t-icon{width:26px;height:26px;flex:0 0 26px}
+.t-content{font-weight:600}
+.t-time{font-weight:bold;margin-right:6px}
+
+/* Botón música */
+.music-btn{position:fixed;bottom:20px;right:20px;background:#efb810;color:#33010E;border:none;padding:12px 16px;border-radius:50px;font-weight:bold;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,.4);z-index:1000}
+
+/* Responsive celular */
+@media(max-width:768px){
+.container{width:95%;padding:30px}
+h1{font-size:3.5em}
+.date{font-size:1.5rem;letter-spacing:2px}
+.gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:480px){
+.gallery-grid{grid-template-columns:1fr}
+.info-box img{height:160px}
+}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="container">
+<div class="top-invite">Tenemos el honor de invitarlos a la celebración de los XV años de nuestra hija</div>
+<h1>Ivanna Kamila</h1>
+<div class="after-name">Hay momentos inolvidables que se atesoran en el corazón para siempre, que son irrepetibles, por esa razón quiero que compartas conmigo este día tan único y especial.</div>
+<div class="date">Sábado 21 de marzo de 2026</div>
+
+
+
+<div class="event-section fade-in">
+<div class="event-title">Misa</div>
+<div class="time">6:00 p.m.</div>
+<div class="event-content">
+<div class="info-box"><img src="ig.jpg"><div><strong>Rectoría San Felipe de Jesús</strong></div></div>
+<div class="info-box"><p class="location">Corona Real Fraccionamiento Villas del Real, 21309 Mexicali, B.C.</p><a href="https://maps.app.goo.gl/KD9zLLVG21Ydcgh56" target="_blank" class="map-button">Ver Ubicación</a></div>
+</div></div>
+
+<div class="event-section fade-in">
+<div class="event-title">Recepción</div>
+<div class="time">8:00 p.m.</div>
+<div class="event-content">
+<div class="info-box"><img src="sal.jpg"><div><strong>Salón Tiffany</strong></div></div>
+<div class="info-box"><p class="location">Local 7, 8, 9, 10, 11, 12, 13, Calz. Anáhuac 273, Paseos de Xochimilco, 21353 Mexicali, B.C.</p><a href="https://maps.app.goo.gl/McX6UCUJKkwvRL3V7" target="_blank" class="map-button">Ver Ubicación</a></div>
+</div></div>
+
+<div class="gallery fade-in">
+<div class="event-title">Galería</div>
+<div class="gallery-grid">
+<img src="i.jpg" ><img src="v.jpg"><img src="a.jpg"><img src="n.jpg"><img src="n2.jpg"><img src="a2.jpg">
+</div></div>
+
+<div class="itinerary fade-in">
+<div class="event-title">Horarios</div>
+<div class="itinerary-box">
+
+  <div class="timeline">
+
+    <div class="t-item">
+      <div class="t-icon">⛪</div>
+      <div class="t-content"><span class="t-time">6:00 pm</span> Misa</div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-icon">🎉</div>
+      <div class="t-content"><span class="t-time">8:00 pm</span> Recepción</div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-icon">💃</div>
+      <div class="t-content"><span class="t-time">8:40 pm</span> Presentación y vals</div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-icon">🍽️</div>
+      <div class="t-content"><span class="t-time">9:30 pm</span> Cena</div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+
+<div class="extra-section fade-in"><div class="event-title">Código de Vestimenta</div>
+<div class="extra-box">Vestimenta formal. Para que la quinceañera luzca especial, reservamos los tonos rojo, guinda, burdeos y similares para ella. ¡Gracias por su comprensión!</div></div>
+
+<div class="extra-section fade-in"><div class="event-title">Mesa de Regalos</div>
+<div class="extra-box">Su presencia es el mejor regalo, pero si desean tener un detalle pueden hacerlo en efectivo/lluvia de sobres. ¡Muchas gracias!</div></div>
+
+<div class="rsvp-note">Favor de confirmar antes del 7 de marzo de 2026</div>
+<a href="https://wa.me/526862094696?text=Hola%2C%20soy%20%5BEscribe%20tu%20nombre%5D%20y%20confirmo%20mi%20asistencia" class="rsvp-button">Confirmar Asistencia</a>
+
+</div>
+
+
+<!-- Modal para zoom -->
+<div class="modal" id="imageModal">
+  <img id="modalImg" src="">
+</div>
+
+<script>
+const images = document.querySelectorAll('.gallery-grid img');
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImg');
+
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    modal.classList.add('active');
+    modalImg.src = img.src;
+  });
+});
+
+modal.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+// Animación al hacer scroll
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = {threshold:0.2};
+const appearOnScroll = new IntersectionObserver(function(entries,observer){
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+},appearOptions);
+
+faders.forEach(fader=>{
+  appearOnScroll.observe(fader);
+});
+
+// Música
+const audio = document.createElement('audio');
+audio.src = 'musica.mp3'; // Cambia por el nombre de tu archivo
+ audio.loop = true;
+document.body.appendChild(audio);
+
+const btn = document.createElement('button');
+btn.innerText = '🎵 Música';
+btn.className = 'music-btn';
+document.body.appendChild(btn);
+
+let playing = false;
+btn.addEventListener('click', ()=>{
+  if(!playing){audio.play();btn.innerText='⏸ Pausar';playing=true;}
+  else{audio.pause();btn.innerText='🎵 Música';playing=false;}
+});
+
+// Partículas doradas
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let particlesArray = [];
+
+class Particle{
+  constructor(){
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 1;
+    this.speedY = Math.random() * 0.5 + 0.2;
+    this.opacity = Math.random() * 0.5 + 0.3;
+  }
+  update(){
+    this.y -= this.speedY;
+    if(this.y < 0){
+      this.y = canvas.height;
+      this.x = Math.random() * canvas.width;
+    }
+  }
+  draw(){
+    ctx.fillStyle = `rgba(239,184,16,${this.opacity})`;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function initParticles(){
+  particlesArray = [];
+  for(let i=0;i<80;i++){
+    particlesArray.push(new Particle());
+  }
+}
+initParticles();
+
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particlesArray.forEach(p=>{
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+</script>
+
+</body>
+</html>
